@@ -3,49 +3,67 @@ from utils.response import success_response, error_response
 
 user_bp = Blueprint("user", __name__, url_prefix="/api/users")
 
-# POST: Create User
+# In-memory database (for learning)
+users = [
+    {"id": 1, "name": "Sahil", "email": "sahil@gmail.com", "age": 20},
+    {"id": 2, "name": "Rahul", "email": "rahul@gmail.com", "age": 22}
+]
+
+# GET: List users
+@user_bp.route("/", methods=["GET"])
+def get_users():
+    return success_response("Users fetched successfully", users)
+
+# POST: Create user
 @user_bp.route("/", methods=["POST"])
 def create_user():
     data = request.get_json()
 
     if not data:
-        return error_response("JSON body is required", 400)
+        return error_response("JSON body required", 400)
 
     name = data.get("name")
     email = data.get("email")
     age = data.get("age")
 
-    # Validation
     if not name or not email:
-        return error_response("Name and email are required", 400)
+        return error_response("Name and email required", 400)
 
-    if age:
-        try:
-            age = int(age)
-            if age < 0:
-                return error_response("Age must be positive", 400)
-        except ValueError:
-            return error_response("Age must be a number", 400)
+    new_user = {
+        "id": len(users) + 1,
+        "name": name,
+        "email": email,
+        "age": age
+    }
 
-    return success_response(
-        message="User created successfully",
-        data={
-            "name": name,
-            "email": email,
-            "age": age
-        },
-        status_code=201
-    )
+    users.append(new_user)
 
-# GET: List Users (dummy data)
-@user_bp.route("/", methods=["GET"])
-def get_users():
-    users = [
-        {"name": "Sahil", "email": "sahil@gmail.com"},
-        {"name": "Rahul", "email": "rahul@gmail.com"}
-    ]
+    return success_response("User created", new_user, 201)
 
-    return success_response(
-        message="Users fetched successfully",
-        data=users
-    )
+# PUT: Update user
+@user_bp.route("/<int:user_id>", methods=["PUT"])
+def update_user(user_id):
+    data = request.get_json()
+
+    if not data:
+        return error_response("JSON body required", 400)
+
+    for user in users:
+        if user["id"] == user_id:
+            user["name"] = data.get("name", user["name"])
+            user["email"] = data.get("email", user["email"])
+            user["age"] = data.get("age", user["age"])
+
+            return success_response("User updated", user)
+
+    return error_response("User not found", 404)
+
+# DELETE: Remove user
+@user_bp.route("/<int:user_id>", methods=["DELETE"])
+def delete_user(user_id):
+    for user in users:
+        if user["id"] == user_id:
+            users.remove(user)
+            return success_response("User deleted")
+
+    return error_response("User not found", 404)
