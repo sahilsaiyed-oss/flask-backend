@@ -19,6 +19,11 @@ This chapter focuses on handling client requests and building a complete CRUD AP
 - In-memory Database
 - CRUD Operations
 
+### 🔹 Day 6
+- Centralized Validation
+- Reusable Utility Functions
+- Error Handling Improvements
+- Clean Backend Architecture
 ---
 
 ##  Project Structure
@@ -96,11 +101,7 @@ data.get("name", user["name"])
 return error_response("User not found", 404)
 
 
-### 🔹 Day 6
-- Centralized Validation
-- Reusable Utility Functions
-- Error Handling Improvements
-- Clean Backend Architecture
+
 
  1. Centralized Validation
 
