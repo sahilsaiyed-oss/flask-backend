@@ -94,3 +94,50 @@ data.get("name", user["name"])
 
  6. 404 Handling
 return error_response("User not found", 404)
+
+
+### 🔹 Day 6
+- Centralized Validation
+- Reusable Utility Functions
+- Error Handling Improvements
+- Clean Backend Architecture
+
+ 1. Centralized Validation
+
+Before:
+
+validation inside route 
+
+Now:
+
+validate_user_data(data) 
+ Cleaner + reusable
+
+ 2. Multiple Error Handling
+errors = []
+errors.append(...)
+
+ Return all errors at once (real-world practice)
+
+ 3. Separation of Concerns
+routes → API logic
+utils → reusable logic
+
+ THIS is what companies expect
+
+ 4. Update vs Create Validation
+is_update=True
+
+ Smart backend design
+
+ 5. GET Single Resource
+GET /api/users/1
+
+ Important REST concept
+
+3. Test Important APIs
+GET    /api/users/
+GET    /api/users/1
+POST   /api/users/
+PUT    /api/users/1
+DELETE /api/users/1
