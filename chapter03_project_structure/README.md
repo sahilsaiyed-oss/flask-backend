@@ -1,60 +1,65 @@
-# 📘 Chapter 03 - Project Structure (Day 7)
+# 📘 Chapter 03 - Project Structure (Day 7–8)
 
 ##  Overview
-This chapter introduces a scalable and production-level project structure for Flask applications.
+This chapter focuses on building scalable Flask applications with proper project structure and environment-based configuration.
 
 ---
 
 ##  Concepts Covered
 
+### 🔹 Day 7
 - App Factory Pattern
-- Feature-based folder structure
+- Modular folder structure
 - Blueprint organization
-- Entry point separation
-- Clean imports
+
+### 🔹 Day 8
+- Environment variables
+- `.env` file usage
+- Config classes (dev/prod)
+- Secure configuration handling
+
 
 ---
 
-## Project Structure
+##  API Endpoints
 
- 1. App Factory (REAL WORLD)
-create_app()
+| Method | Endpoint        | Description      |
+|--------|----------------|------------------|
+| GET    | /health        | Health check     |
+| GET    | /api/users/    | Get users        |
+| POST   | /api/users/    | Create user      |
 
- Used in:
+---
 
-Large apps
-Testing
-Deployment
+##  Run Project
 
- 2. Feature-Based Structure
+```bash
+pip install -r requirements.txt
+python run.py
 
-Instead of:
+1. Environment Variables
+SECRET_KEY=...
 
-routes/
+Used to store sensitive data
 
-Now:
+2. .env File
+Keeps secrets outside code
+Used in real production apps
+3. Config Classes
+DevelopmentConfig
+ProductionConfig
 
-app/routes/user_routes.py
-app/routes/health_routes.py
+Different settings for different environments
 
- Scales easily
+4. python-dotenv
+load_dotenv()
 
- 3. Entry Point Separation
-run.py
+Loads .env variables
 
- Industry standard
+5. Environment Switching
+FLASK_ENV=development
 
-4. Clean Imports
-from app.utils.response import ...
+Controls behavior of app
 
- Proper package usage
-
- 5. Project Readiness
-
-Now your project is:
- Scalable
- Maintainable
- Production-ready base
-
- 3. Run Project
+7. Run Project
 python run.py
