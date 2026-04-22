@@ -1,11 +1,11 @@
-# 📘 Chapter 03 - Project Structure (Day 7–8)
+#  Chapter 03 - Project Structure (Day 7–9)
 
 ##  Overview
-This chapter focuses on building scalable Flask applications with proper project structure and environment-based configuration.
+This chapter focuses on building scalable Flask applications with clean architecture, environment configuration, and production-ready practices.
 
 ---
 
-##  Concepts Covered
+## Concepts Covered
 
 ### 🔹 Day 7
 - App Factory Pattern
@@ -14,9 +14,17 @@ This chapter focuses on building scalable Flask applications with proper project
 
 ### 🔹 Day 8
 - Environment variables
-- `.env` file usage
-- Config classes (dev/prod)
-- Secure configuration handling
+- `.env` usage
+- Config management
+
+### 🔹 Day 9
+- Global error handling
+- Logging system
+- Middleware (request lifecycle hooks)
+
+---
+
+##  Project Structure
 
 
 ---
@@ -34,32 +42,41 @@ This chapter focuses on building scalable Flask applications with proper project
 ##  Run Project
 
 ```bash
-pip install -r requirements.txt
 python run.py
 
-1. Environment Variables
-SECRET_KEY=...
+1. Global Error Handling
+@app.errorhandler(404)
 
-Used to store sensitive data
+Handles errors centrally
 
-2. .env File
-Keeps secrets outside code
-Used in real production apps
-3. Config Classes
-DevelopmentConfig
-ProductionConfig
+2. Logging
+logger.info(...)
 
-Different settings for different environments
+Tracks requests & responses
+Used in debugging & monitoring
 
-4. python-dotenv
-load_dotenv()
+3. Middleware Concept
+@app.before_request
+@app.after_request
 
-Loads .env variables
+Runs before/after every request
+Used for:
 
-5. Environment Switching
-FLASK_ENV=development
+Logging
+Auth
+Tracking
+4. Clean Error Responses
 
-Controls behavior of app
+Instead of crash:
 
-7. Run Project
-python run.py
+{
+  "success": false,
+  "error": "Route not found"
+}
+6. Test
+
+Try invalid route:
+
+http://127.0.0.1:5000/invalid
+
+ You should get clean 404 response
