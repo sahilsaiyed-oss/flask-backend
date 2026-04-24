@@ -1,5 +1,5 @@
 from flask import Flask
-from config import Config
+from chapter04_templates.config import Config
 
 from app.routes.user_routes import user_bp
 from app.routes.web_routes import web_bp
