@@ -58,3 +58,40 @@ user_bp → API
 web_bp → frontend routes
 
  Clean separation
+
+
+  (Day 11)
+
+##  Overview
+This chapter extends frontend integration by adding HTML forms and handling POST requests from the browser.
+
+---
+
+##  Concepts Covered
+
+- HTML Forms
+- POST requests from frontend
+- Handling form data in Flask
+- Redirect after form submission
+
+---
+
+##  Routes
+
+| Route       | Description        |
+|-------------|--------------------|
+| /           | Home page          |
+| /users      | User list          |
+| /add-user   | Add user form      |
+
+---
+
+##  Run Project
+
+```bash
+python run.py
+ Learning Outcome
+Build forms in HTML
+Send POST requests from frontend
+Handle form data in Flask
+Understand full request-response cycle
