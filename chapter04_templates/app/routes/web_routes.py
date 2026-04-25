@@ -1,40 +1,41 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 
 web_bp = Blueprint("web", __name__)
 
-# Dummy DB (shared)
+# Dummy DB
 users = [
     {"name": "Sahil", "email": "sahil@gmail.com"},
     {"name": "Rahul", "email": "rahul@gmail.com"}
 ]
 
-# Home
 @web_bp.route("/")
 def home():
     return render_template("index.html")
 
-# Show users
 @web_bp.route("/users")
 def users_page():
     return render_template("users.html", users=users)
 
-# Show form
-@web_bp.route("/add-user")
-def add_user_page():
-    return render_template("add_user.html")
-
-# Handle form POST
-@web_bp.route("/add-user", methods=["POST"])
+@web_bp.route("/add-user", methods=["GET", "POST"])
 def add_user():
-    name = request.form.get("name")
-    email = request.form.get("email")
+    if request.method == "POST":
+        name = request.form.get("name")
+        email = request.form.get("email")
 
-    if not name or not email:
-        return "Name and Email required", 400
+        # 1. Validation: Check if empty
+        if not name or not email:
+            flash("All fields are required!", "danger")
+            return redirect(url_for("web.add_user"))
 
-    users.append({
-        "name": name,
-        "email": email
-    })
+        # 2. Validation: Check if email exists
+        for user in users:
+            if user["email"] == email:
+                flash(f"Error: Email {email} is already registered!", "warning")
+                return redirect(url_for("web.add_user"))
 
-    return redirect(url_for("web.users_page"))
+        # 3. Success Flow
+        users.append({"name": name, "email": email})
+        flash("User added successfully!", "success")
+        return redirect(url_for("web.users_page"))
+
+    return render_template("add_user.html")
