@@ -151,3 +151,36 @@ Flask Flash: Temporary session-based messaging.
 Category Styling: Using categories for Success/Error UI.
 
 Logic Validation: Preventing duplicate data.
+
+(Day 12)
+
+## 📌 Overview
+This chapter improves frontend UX by adding flash messages and validation feedback to forms.
+
+---
+
+## 🚀 Concepts Covered
+
+- Flash messages in Flask
+- Secret key for sessions
+- Validation feedback in UI
+- Duplicate data prevention
+
+---
+
+## 📁 Project Structure
+
+## 🔗 Routes
+
+| Route       | Description        |
+|-------------|--------------------|
+| /           | Home page          |
+| /users      | User list          |
+| /add-user   | Add user form      |
+
+---
+
+## ▶️ Run Project
+
+```bash
+python run.py
