@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Flask App</title>
-</head>
-<body>
-    <h1>Welcome to Flask Backend 🚀</h1>
-    <a href="/users">View Users</a>
-    <a href="/users">View Users</a><br>
-<a href="/add-user">Add User</a>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h1>Welcome to Flask Backend 🚀</h1>
+    <p>This is the homepage.</p>
+{% endblock %}

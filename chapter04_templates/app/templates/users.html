@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Users</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Users{% endblock %}
+
+{% block content %}
     <h2>User List</h2>
 
     <ul>
@@ -11,8 +10,4 @@
             <li>{{ user.name }} - {{ user.email }}</li>
         {% endfor %}
     </ul>
-
-    <a href="/">Go Back</a>
-    <a href="/add-user">Add New User</a>
-</body>
-</html>
+{% endblock %}

@@ -1,22 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add User</title>
-</head>
-<body>
+{% extends "base.html" %}
 
+{% block title %}Add User{% endblock %}
+
+{% block content %}
     <h2>Add New User</h2>
-
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <p style="color:
-                    {% if category == 'error' %}red{% else %}green{% endif %};">
-                    {{ message }}
-                </p>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
 
     <form method="POST" action="/add-user">
         <label>Name:</label><br>
@@ -27,9 +14,4 @@
 
         <button type="submit">Add User</button>
     </form>
-
-    <br>
-    <a href="/users">Back to Users</a>
-
-</body>
-</html>
+{% endblock %}
