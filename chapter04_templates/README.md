@@ -184,3 +184,35 @@ This chapter improves frontend UX by adding flash messages and validation feedba
 
 ```bash
 python run.py
+
+
+Template Inheritance (Day 13)
+
+## 📌 Overview
+This chapter introduces reusable HTML layouts using Jinja template inheritance.
+
+---
+
+## 🚀 Concepts Covered
+
+- Base template layout
+- Template inheritance
+- Jinja blocks
+- Reusable navbar and flash message sections
+
+
+---
+
+## 🎯 Learning Outcome
+
+- Avoid duplicate HTML  
+- Build scalable template systems  
+- Understand reusable layouts in Flask  
+
+---
+
+## 📅 Progress
+
+- ✅ Day 13 Completed  
+- ⏳ Day 14 Next (Static files + CSS styling)
+
