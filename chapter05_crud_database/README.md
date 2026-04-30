@@ -78,3 +78,65 @@ Creates all tables based on models automatically.
 class User(db.Model)
 
 Represents database table structure.
+
+
+# 📘 Chapter 05 — Full CRUD Operations (Day 16)
+
+## 📌 Overview
+This chapter extends the Flask SQLAlchemy app by implementing full CRUD functionality including Update and Delete operations.
+
+---
+
+## 🚀 Concepts Covered
+
+- Fetching records by ID
+- Updating database rows
+- Deleting records
+- Edit forms with pre-filled data
+- 404 handling with get_or_404
+
+---
+
+## 📁 New Files
+
+```bash
+templates/edit_user.html
+``` id="t1sy3r"
+
+---
+
+## 🎯 Learning Outcome
+
+- Perform full CRUD in Flask  
+- Edit records via HTML forms  
+- Delete database entries  
+- Handle missing records safely  
+
+---
+
+## 📅 Progress
+
+- ✅ Day 16 Completed  
+- ⏳ Day 17 Next (Validation + Flash + Better CRUD UX)
+
+
+📘 Theory / Explanation
+🔥 Update Operation
+user.name = request.form.get("name")
+
+Updates DB row fields.
+
+🔥 Delete Operation
+db.session.delete(user)
+
+Marks record for deletion.
+
+🔥 Commit Changes
+db.session.commit()
+
+Persists DB modifications.
+
+🔥 get_or_404()
+User.query.get_or_404(user_id)
+
+Automatically returns 404 page if record not found.
