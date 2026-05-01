@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, render_template, request, redirect, flash
 from app import db
 from app.models import User
 
@@ -16,11 +16,18 @@ def add_user():
     name = request.form.get("name")
     email = request.form.get("email")
 
+    existing_user = User.query.filter_by(email=email).first()
+
+    if existing_user:
+        flash("Email already exists!", "error")
+        return redirect("/")
+
     new_user = User(name=name, email=email)
 
     db.session.add(new_user)
     db.session.commit()
 
+    flash("User added successfully!", "success")
     return redirect("/")
 
 
@@ -34,11 +41,23 @@ def edit_user_page(user_id):
 def update_user(user_id):
     user = User.query.get_or_404(user_id)
 
+    new_email = request.form.get("email")
+
+    duplicate_user = User.query.filter(
+        User.email == new_email,
+        User.id != user_id
+    ).first()
+
+    if duplicate_user:
+        flash("Another user already uses this email!", "error")
+        return redirect(f"/edit-user/{user_id}")
+
     user.name = request.form.get("name")
-    user.email = request.form.get("email")
+    user.email = new_email
 
     db.session.commit()
 
+    flash("User updated successfully!", "success")
     return redirect("/")
 
 
@@ -49,4 +68,5 @@ def delete_user(user_id):
     db.session.delete(user)
     db.session.commit()
 
+    flash("User deleted successfully!", "success")
     return redirect("/")
