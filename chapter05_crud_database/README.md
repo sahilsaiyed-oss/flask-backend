@@ -192,3 +192,67 @@ Better UX
 onclick="return confirm(...)"
 
 Browser popup before delete.
+
+
+# 📘 Chapter 05 — Search & Filter Users (Day 18)
+
+## 📌 Overview
+Added search functionality to the CRUD dashboard for filtering users dynamically by name or email.
+
+---
+
+## 🚀 Concepts Covered
+
+- Query Parameters
+- Search Forms
+- SQLAlchemy Filtering
+- Case-Insensitive Search
+
+---
+
+## 🎯 Learning Outcome
+
+- Read URL Query Parameters  
+- Filter DB Results Dynamically  
+- Build Searchable Admin Interfaces  
+
+---
+
+## 📅 Progress
+
+- ✅ Day 18 Completed  
+- ⏳ Day 19 Next (Sorting + Pagination)
+
+🧪 3. Test Search
+
+Try:
+
+http://127.0.0.1:5000/?search=sahil
+📘 Theory / Explanation
+🔥 Query Parameters
+request.args.get("search")
+
+Reads URL params like:
+
+/?search=sahil
+🔥 SQL ILIKE
+User.name.ilike(...)
+
+Case-insensitive search.
+
+🔥 Multi-Field Filter
+(User.name.ilike(...)) | (User.email.ilike(...))
+
+Searches across:
+
+Name
+Email
+🔥 Why This Matters
+
+Real dashboards need:
+
+Search
+Filters
+Query params
+
+This is standard admin panel functionality.
