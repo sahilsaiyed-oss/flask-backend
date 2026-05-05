@@ -256,3 +256,72 @@ Filters
 Query params
 
 This is standard admin panel functionality.
+
+# 📘 Chapter 05 — Sorting & Pagination (Day 19)
+
+## 📌 Overview
+Enhanced the CRUD system with sorting and pagination to efficiently manage large datasets.
+
+---
+
+## 🚀 Concepts Covered
+
+- Pagination using SQLAlchemy
+- Sorting query results
+- Query parameters (page, sort)
+- Efficient data loading
+
+---
+
+## 🎯 Learning Outcome
+
+- Implement pagination in Flask  
+- Sort database results dynamically  
+- Build scalable backend APIs  
+
+---
+
+## 📅 Progress
+
+- ✅ Day 19 Completed  
+- ⏳ Day 20 Next (API version of CRUD)
+
+🧪 3. Test URLs
+Pagination
+/?page=2
+Sorting
+/?sort=desc
+Combined
+/?search=sahil&sort=asc&page=1
+📘 Theory / Explanation
+🔥 Pagination
+query.paginate(page=page, per_page=3)
+
+Returns:
+
+items
+page
+pages
+has_next
+has_prev
+🔥 Sorting
+User.name.asc()
+User.name.desc()
+
+Controls order of results.
+
+🔥 Query Parameters
+request.args.get("page")
+
+Reads from URL:
+
+?page=2
+🔥 Why This Matters
+
+Real systems NEVER:
+❌ load all data at once
+
+They always:
+✅ paginate
+✅ filter
+✅ sort
