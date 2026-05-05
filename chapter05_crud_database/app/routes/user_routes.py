@@ -1,5 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, flash
-from app import db
+from flask import Blueprint, render_template, request
 from app.models import User
 
 user_bp = Blueprint("user", __name__)
@@ -8,37 +7,31 @@ user_bp = Blueprint("user", __name__)
 @user_bp.route("/")
 def home():
     search_query = request.args.get("search", "")
+    sort_order = request.args.get("sort", "asc")
+    page = request.args.get("page", 1, type=int)
 
+    query = User.query
+
+    # 🔍 Search filter
     if search_query:
-        users = User.query.filter(
+        query = query.filter(
             (User.name.ilike(f"%{search_query}%")) |
             (User.email.ilike(f"%{search_query}%"))
-        ).all()
+        )
+
+    # 🔽 Sorting
+    if sort_order == "desc":
+        query = query.order_by(User.name.desc())
     else:
-        users = User.query.all()
+        query = query.order_by(User.name.asc())
+
+    # 📄 Pagination
+    per_page = 3
+    users = query.paginate(page=page, per_page=per_page)
 
     return render_template(
         "users.html",
         users=users,
-        search_query=search_query
+        search_query=search_query,
+        sort_order=sort_order
     )
-
-
-@user_bp.route("/add-user", methods=["POST"])
-def add_user():
-    name = request.form.get("name")
-    email = request.form.get("email")
-
-    existing_user = User.query.filter_by(email=email).first()
-
-    if existing_user:
-        flash("Email already exists!", "error")
-        return redirect("/")
-
-    new_user = User(name=name, email=email)
-
-    db.session.add(new_user)
-    db.session.commit()
-
-    flash("User added successfully!", "success")
-    return redirect("/")
