@@ -49,8 +49,8 @@ POST /api/users
 Content-Type: application/json
 
 {
-    "name": "Rahul",
-    "email": "rahul@gmail.com"
+    "name": "Sahil",
+    "email": "sahil067@gmail.com"
 }
 Update User
 PUT /api/users/1
@@ -90,3 +90,4 @@ GET	Fetch Data
 POST	Create Data
 PUT	Update Data
 DELETE	Remove Data
+
